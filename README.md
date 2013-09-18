@@ -92,6 +92,12 @@ Creating a site will initiate a new deploy. You can either create a new site wit
 
 This will return `201 Created` with the API URL for the new site in the `Location` header, along with a simplified JSON representation of the site. The site will be in the `processing` state and you can poll the URL in the `Location` header until the state has changed to either `ready` or `error`.
 
+Here's an example of creating a new site from a zip file called `landing.zip` via Curl (assuming you've gone through the process to get an oauth access_token) 
+
+```bash
+curl -F "zip=@landing.zip;type=application/zip" https://www.bitballoon.com/api/v1/sites?access_token={access_token}
+```
+
 * `POST /sites` with `{files: {"/index.html": "SHA1_OF_YOUR_INDEX_HTML"}}` will create a new site in the `uploading` state. You must use `Content-Type: application/json`
 
 The files object should contain all the files you wish to upload for this deploy, together with a SHA1 of the content of each file.
