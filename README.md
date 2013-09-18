@@ -1,7 +1,7 @@
 BitBalloon REST API
 ===================
 
-BitBalloon is a hosting service for the programmable web. It understands your documents, processes forms and lets you do deploys, manage forms submissions, inject javascript snippets into sites and do intelligent updates of HTML documents through it's API. This is a REST-style API that uses JSON for serialization and OAuth 2 for authentication.
+BitBalloon is a hosting service for the programmable web. It understands your documents, processes forms and lets you do deploys, manage forms submissions, inject javascript snippets into sites and do intelligent updates of HTML documents through the API documented here. This is a REST-style API that uses JSON for serialization and OAuth 2 for authentication.
 
 Making a request
 ----------------
