@@ -6,9 +6,9 @@ BitBalloon is a hosting service for the programmable web. It understands your do
 Making a request
 ----------------
 
-All URLs start with `https://www.bitballoon.com/api/v1/`. **SSL only**. The path is prefixed the API version. If we change the API in backward-incompatible ways, we'll bump the version marker and maintain stable support for the old URLs.
+All URLs start with `https://www.bitballoon.com/api/v1/`. **SSL only**. The path is prefixed with the API version. If we change the API in backward-incompatible ways, we'll bump the version marker and maintain stable support for the old URLs.
 
-To make a request for all the sites you have access to, you'd append the sites index path to the base url to form something like https://www.bitballoon.com/999999999/api/v1/sites. In curl, that looks like:
+To make a request for all the sites you have access to, you'd append the sites index path to the base url to form something like https://www.bitballoon.com/api/v1/sites. In curl, that looks like:
 
 ```shell
 curl -H 'User-Agent: MyApp (yourname@example.com)' https://www.bitballoon.com/api/v1/sites?access_token=oauth2_access_token
@@ -20,6 +20,8 @@ Authenticating
 BitBalloon uses OAuth2 for authentication. All requests must use HTTPS. You'll need an application client key and a client secret before you can access the BitBalloon API. Please contact us at team@bitballoon.com for your credentials.
 
 If you're making a public integration with BitBalloon for others to enjoy, you must use OAuth 2. This allows users to authorize your application to use BitBalloon on their behalf without having to copy/paste API tokens or touch sensitive login info.
+
+The Oauth2 end user authorization endpoint is `https://www.bitballoon.com/oauth/authorize`.
 
 Sites
 -----
