@@ -110,6 +110,15 @@ This will return `201 Created` with the API URL for the new site in the `Locatio
 
 To upload any required files, use the `POST /sites/{site_id}/files` endpoint for each file.
 
+Destroy Site
+------------
+
+* `DELETE /sites/{site_id}` will permanently delete a site 
+* `DELETE /sites/{site_domain}` will permanently delete a site
+
+This will return `200 OK`.
+
+
 Submissions
 ===========
 
@@ -143,6 +152,3 @@ Get Submissions
   }
 ]
 ```
-
-Files
-=====
