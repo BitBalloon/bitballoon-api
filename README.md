@@ -33,6 +33,7 @@ Get Sites
 
 * `GET /sites` will return all sites you have access to.
 
+
     [
       {
         "id":"3970e0fe-8564-4903-9a55-c5f8de49fb8b",
@@ -49,11 +50,13 @@ Get Sites
       }
     ]
 
+
 Get Site
 --------
 
 * `GET /sites/3970e0fe-8564-4903-9a55-c5f8de49fb8b` will return the site from its ID
 * `GET /sites/www.example.com` will return the site matching the domain `www.example.com`
+
 
     {
       "id":"3970e0fe-8564-4903-9a55-c5f8de49fb8b",
@@ -69,12 +72,14 @@ Get Site
       "user_id":{"51f60d2d5803545326000005"},
     }
 
+
 Create Site
 -----------
 
 Creating a site will initiate a new deploy. You can either create a new site with a list of files you intend to upload, or by posting a ZIP file.
 
 * `POST /sites` with `zip=zip-file`. You must use `Content-Type: multipart/form-data` to send the zip file in a property called `zip`.
+
 
     {
       "id": "3970e0fe-8564-4903-9a55-c5f8de49fb8b",
@@ -84,11 +89,13 @@ Creating a site will initiate a new deploy. You can either create a new site wit
       "required": []
     }
 
+
 This will return `201 Created` with the API URL for the new site in the `Location` header, along with a simplified JSON representation of the site. The site will be in the `processing` state and you can poll the URL in the `Location` header until the state has changed to either `ready` or `error`.
 
 * `POST /sites` with `{files: {"/index.html": "SHA1_OF_YOUR_INDEX_HTML"}}` will create a new site in the `uploading` state. You must use `Content-Type: application/json`
 
 The files object should contain all the files you wish to upload for this deploy, together with a SHA1 of the content of each file.
+
 
     {
       "id": "3970e0fe-8564-4903-9a55-c5f8de49fb8b",
@@ -97,6 +104,7 @@ The files object should contain all the files you wish to upload for this deploy
       "state": "uploading",
       "required": ["SHA1_OF_YOUR_INDEX_HTML"]
     }
+
 
 This will return `201 Created` with the API URL for the new site in the `Location` header, along with a simplified JSON representation of the site. The `required` property will give you a list of files you need to upload. BitBalloon will inspect the SHA1s you sent in the request. You'll only need to upload the files BitBalloon doesn't have on its servers. The `state` can be either `uploading` or `processing` depending on whether or not you need to upload any more files.
 
