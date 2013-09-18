@@ -1,7 +1,7 @@
 BitBalloon REST API
 ===================
 
-BitBalloon is a hosting service for the programmable web. It understands your documents, processes forms and lets you do deploys, manage forms submissions, inject javascript snippets into sites and do intelligent updates of HTML documents through the API documented here. This is a REST-style API that uses JSON for serialization and OAuth 2 for authentication.
+BitBalloon is a hosting service for the programmable web. It understands your documents and provides an API to deploy sites, manage form submissions, inject javascript snippets and do intelligent updates of HTML documents. This is a REST-style API that uses JSON for serialization and OAuth 2 for authentication.
 
 Making a request
 ----------------
@@ -132,7 +132,7 @@ This will return `200 OK`.
 Submissions
 ===========
 
-The `/submissions` endpoint allow you to access form submissions from your BitBalloon sites. You can scope submissions to a specific site (`/sites/{site_id}/submissions`) or to a specific form (`/forms/{form_id}/submissions`).
+The `/submissions` endpoint gives access to the form submissions of your BitBalloon sites. You can scope submissions to a specific site (`/sites/{site_id}/submissions`) or to a specific form (`/forms/{form_id}/submissions`).
 
 Get Submissions
 ---------------
