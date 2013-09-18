@@ -24,7 +24,7 @@ If you're making a public integration with BitBalloon for others to enjoy, you m
 The Oauth2 end user authorization endpoint is `https://www.bitballoon.com/oauth/authorize`.
 
 Sites
------
+=====
 
 The `/sites` endpoint allows you to access the sites deployed on BitBalloon.
 
@@ -109,3 +109,40 @@ The files object should contain all the files you wish to upload for this deploy
 This will return `201 Created` with the API URL for the new site in the `Location` header, along with a simplified JSON representation of the site. The `required` property will give you a list of files you need to upload. BitBalloon will inspect the SHA1s you sent in the request. You'll only need to upload the files BitBalloon doesn't have on its servers. The `state` can be either `uploading` or `processing` depending on whether or not you need to upload any more files.
 
 To upload any required files, use the `POST /sites/{site_id}/files` endpoint for each file.
+
+Submissions
+===========
+
+The `/submissions` endpoint allow you to access form submissions from your BitBalloon sites. You can scope submissions to a specific site (`/sites/{site_id}/submissions`) or to a specific form (`/forms/{form_id}/submissions`).
+
+Get Submissions
+---------------
+
+* `GET /submissions` will return a list of form submissions
+
+```json
+[
+  {
+    "id":"5231110b5803540aeb000019",
+    "number":13,
+    "title":null,
+    "email":"test@example.com",
+    "name":"Mathias Biilmann",
+    "first_name":"Mathias",
+    "last_name":"Biilmann",
+    "company":"BitBalloon",
+    "summary":"Hello, World",
+    "body":"Hello, World",
+    "data": {
+      "email":"test@example.com",
+      "name": "Mathias Biilmann",
+      "ip":"127.0.0.1"
+    },
+    "created_at":"2013-09-12T00:55:39Z",
+    "site_url":"http://synergy.bitballoon.com"
+  }
+]
+```
+
+Files
+=====
