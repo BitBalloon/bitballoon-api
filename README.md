@@ -78,6 +78,8 @@ Create Site
 
 Creating a site will initiate a new deploy. You can either create a new site with a list of files you intend to upload, or by posting a ZIP file.
 
+### POST a ZIP file
+
 * `POST /sites` with `zip=zip-file`. You must use `Content-Type: multipart/form-data` to send the zip file in a property called `zip`.
 
 ```json
@@ -97,6 +99,8 @@ Here's an example of creating a new site from a zip file called `landing.zip` vi
 ```bash
 curl -F "zip=@landing.zip;type=application/zip" https://www.bitballoon.com/api/v1/sites?access_token={access_token}
 ```
+
+### POST a list of files
 
 * `POST /sites` with `{files: {"/index.html": "SHA1_OF_YOUR_INDEX_HTML"}}` will create a new site in the `uploading` state. You must use `Content-Type: application/json`
 
