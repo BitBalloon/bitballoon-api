@@ -162,3 +162,78 @@ Get Submissions
   }
 ]
 ```
+
+Forms
+=====
+
+The `/forms` endpoint allow you to access forms from your BitBalloon sites. You can scope forms to a specific site with `/sites/{site_id}/forms`.
+
+Get Forms
+---------
+
+* `GET /forms` will return a list of forms
+
+```json
+[
+  {
+    "id":"ac0865cc46440b1e64666f520e8d88d670c8a2f6",
+    "site_id":"0d3a9d2f-ef94-4380-93df-27ee400e2048",
+    "name":"Landing Page",
+    "paths":["/index"],
+    "submission_count":3,
+    "fields": [
+      {"name":"name","type":"text"},
+      {"name":"email","type":"email"},
+      {"name":"phone","type":"text"},
+      {"name":"company","type":"text"},
+      {"name":"website","type":"url"},
+      {"name":"number_of_employees","type":"select"}
+    ],
+    "created_at":"2013-09-18T20:26:19Z"
+  }
+]
+```
+
+Files
+=====
+
+All files deployed by BitBalloon can be read, updated and deleted through the API. Where the public URL of a file will serve the processed version, the files accessed through the API are the original uploaded files. Any changes to a file will trigger a reprocessing of the site and a new deploy will be stored in the site history. This means all changes made through the API can always be rolled back by the user through the dashboard UI.
+
+Get Files
+---------
+
+* `GET /sites/{site_id}/files` will return a list of all the files in the current deploy
+
+```json
+[
+  {"id":"/index.html",
+  "path":"/index.html",
+  "sha":"20828dcdf2cd07e5980fe52759101591bf5014ab",
+  "mime_type":"text/html",
+  "size":27232
+  }
+]
+```
+
+Get File
+--------
+
+* `GET /sites/{site_id}/files/{path-to-file}` will return the content of a file
+
+This lets you download the file content of the original documents uploaded by a user.
+
+Put File
+--------
+
+* `PUT /sites/{site_id}/files/{path-to-file}` will add or update a file, reprocess all assets and create a new deploy
+
+The request body will be used as the new content for this file.
+
+Delete File
+-----------
+
+* `DELETE /sites/{site_id}/files/{path-to-file}` will delete a file from the site.
+
+Note that this creates a new version of the site without the deleted file. The old version can still be rolled back and the file does not get deleted from BitBalloon's servers.
+
+
