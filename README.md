@@ -118,7 +118,7 @@ The files object should contain all the files you wish to upload for this deploy
 
 This will return `201 Created` with the API URL for the new site in the `Location` header, along with a simplified JSON representation of the site. The `required` property will give you a list of files you need to upload. BitBalloon will inspect the SHA1s you sent in the request. You'll only need to upload the files BitBalloon doesn't have on its servers. The `state` can be either `uploading` or `processing` depending on whether or not you need to upload any more files.
 
-To upload any required files, use the `POST /sites/{site_id}/files` endpoint for each file.
+To upload any required files, use the `PUT /sites/{site_id}/files/{path}` endpoint for each file. Once all the files are uploaded, the processing of the site will begin.
 
 Destroy Site
 ------------
