@@ -23,6 +23,21 @@ If you're making a public integration with BitBalloon for others to enjoy, you m
 
 The Oauth2 end user authorization endpoint is `https://www.bitballoon.com/oauth/authorize`.
 
+Endpoints
+---------
+
+* `/sites` all sites
+* `/sites/{site_id}/forms` all forms for a site
+* `/sites/{site_id}/submissions` all submissions for a site
+* `/sites/{site_id}/files` all files for a site
+* `/sites/{site_id}/snippets` all snippets to be injected into the HTML of a site
+* `/sites/{site_id}/metadata` a metadata object for a site (can be used in combination with the snippets)
+* `/forms` all forms
+* `/forms/{form_id}/submissions` all submissions from a specific form
+* `/submissions` all form submissions
+* `/users` all users you have access to
+
+
 Sites
 =====
 
@@ -64,6 +79,7 @@ Get Site
   "claimed":true,
   "name":"synergy",
   "custom_domain":"www.example.com",
+  "notification_email:"me@example.com",
   "url":"http://www.example.com",
   "admin_url":"https://www.bitballoon.com/sites/synergy",
   "screenshot_url":null,
@@ -119,6 +135,15 @@ The files object should contain all the files you wish to upload for this deploy
 This will return `201 Created` with the API URL for the new site in the `Location` header, along with a simplified JSON representation of the site. The `required` property will give you a list of files you need to upload. BitBalloon will inspect the SHA1s you sent in the request. You'll only need to upload the files BitBalloon doesn't have on its servers. The `state` can be either `uploading` or `processing` depending on whether or not you need to upload any more files.
 
 To upload any required files, use the `PUT /sites/{site_id}/files/{path}` endpoint for each file. Once all the files are uploaded, the processing of the site will begin.
+
+Update Site
+-----------
+
+* `PATCH /sites/{site_id}` will let you update some attributes on a site
+* `PUT /sites/{site_id}` will let you update some attributes on a site
+
+This lets you update the name (also the preview subdomain), custom_domain and notification_email fields of a site.
+
 
 Destroy Site
 ------------
@@ -293,3 +318,49 @@ Delete Snippet
 --------------
 
 * `DELETE /sites/{site_id}/snippets/{snippet_id}` delete a snippet.
+ 
+Metadata
+========
+
+Each site has a metadata object. The properties of the metadata object can be used within the snippets for a site by sing the [Liquid](https://github.com/Shopify/liquid) template syntax.
+
+Get Metadata
+------------
+
+* `GET /sites/{site_id}/metadata` get the metadata for a site
+
+```json
+{
+  "my_meta_key": "my_meta_value"
+}
+```
+
+Update Metadata
+---------------
+
+* `PUT /sites/{site_id}/metadata` replace the metdata object with a new metadata object
+
+Users
+=====
+
+Mainly useful for reseller admins. Lets you access all users under your reseller account.
+
+Get Users
+---------
+
+* `GET /users` get a list users you have access to
+
+```json
+[
+  {
+    "id": "52465eb05803543960000015",
+    "email":"user@example.com",
+    "affiliate_id":"",
+    "site_count":1,
+    "created_at":"2013-09-28T04:44:32Z",
+    "last_login":"2013-09-28T04:44:33Z"
+  }
+]
+```
+
+Once you have a user id you can query sites, forms and submissions scoped to that user (ie. /users/{user_id}/sites).
