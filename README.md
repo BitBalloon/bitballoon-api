@@ -36,6 +36,9 @@ Endpoints
 * `/forms/{form_id}/submissions` all submissions from a specific form
 * `/submissions` all form submissions
 * `/users` all users you have access to
+* `/users/{user_id}/sites` all sites for a specific user
+* `/users/{user_id}/forms` all forms for a specific user
+* `/users/{user_id}/submissions` all form submissions for a specific user
 
 
 Sites
