@@ -239,7 +239,7 @@ Note that this creates a new version of the site without the deleted file. The o
 Snippets
 ========
 
-Snippets are code snippets that will be injected into every HTML page of the website, either right before the closing head tag or just before the closing body tag.
+Snippets are code snippets that will be injected into every HTML page of the website, either right before the closing head tag or just before the closing body tag. Each snippet can specify code for all pages and code that just get injected into "Thank you" pages shown after a successful form submissions.
 
 Get Snippets
 ------------
