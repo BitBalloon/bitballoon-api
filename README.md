@@ -32,6 +32,7 @@ Endpoints
 * `/sites/{site_id}/files` all files for a site
 * `/sites/{site_id}/snippets` all snippets to be injected into the HTML of a site
 * `/sites/{site_id}/metadata` a metadata object for a site (can be used in combination with the snippets)
+* `/sites/{site_id}/deploys` all deploys for a site
 * `/forms` all forms
 * `/forms/{form_id}/submissions` all submissions from a specific form
 * `/submissions` all form submissions
@@ -40,6 +41,7 @@ Endpoints
 * `/users/{user_id}/forms` all forms for a specific user
 * `/users/{user_id}/submissions` all form submissions for a specific user
 
+A note on the `site_id`: this can either be the actual `id` of a site, but it is interchangeable with the full domain for a site (some-site.bitballoon.com or site.example.com).
 
 Sites
 =====
@@ -342,6 +344,85 @@ Update Metadata
 ---------------
 
 * `PUT /sites/{site_id}/metadata` replace the metdata object with a new metadata object
+
+Deploys
+=======
+
+You can access all deploys for a specific site.
+
+Get Deploys
+------------
+
+* `GET /sites/{site_id}/deploys` a list of all deploys
+
+```json
+[
+  {
+    "id":"52465f435803544542000001",
+    "premium":false,
+    "claimed":true,
+    "name":"synergy",
+    "custom_domain":"www.example.com",
+    "notification_email:"me@example.com",
+    "url":"http://www.example.com",
+    "deploy_url": "http://52465f435803544542000001.some-site.bitballoon.com",
+    "admin_url":"https://www.bitballoon.com/sites/synergy",
+    "screenshot_url":null,
+    "created_at":"2013-09-17T05:13:08Z",
+    "updated_at":"2013-09-17T05:13:19Z",
+    "user_id":{"51f60d2d5803545326000005"},
+    "state": "old"
+  }
+]
+```
+
+Get Deploy
+----------
+
+* `GET /sites/{site_id}/deploys/{deploy_id}` a specific deploy
+
+```json
+{
+  "id":"52465f435803544542000001",
+  "premium":false,
+  "claimed":true,
+  "name":"synergy",
+  "custom_domain":"www.example.com",
+  "notification_email:"me@example.com",
+  "url":"http://www.example.com",
+  "deploy_url": "http://52465f435803544542000001.some-site.bitballoon.com",
+  "admin_url":"https://www.bitballoon.com/sites/synergy",
+  "screenshot_url":null,
+  "created_at":"2013-09-17T05:13:08Z",
+  "updated_at":"2013-09-17T05:13:19Z",
+  "user_id":{"51f60d2d5803545326000005"},
+  "state": "old"
+}
+```
+
+Restore Deploy
+--------------
+
+* `POST /sites/{site_id}/deploys/{deploy_id}/restore` restore an old deploy and make it the live version of the site
+
+```json
+{
+  "id":"52465f435803544542000001",
+  "premium":false,
+  "claimed":true,
+  "name":"synergy",
+  "custom_domain":"www.example.com",
+  "notification_email:"me@example.com",
+  "url":"http://www.example.com",
+  "deploy_url": "http://52465f435803544542000001.some-site.bitballoon.com",  
+  "admin_url":"https://www.bitballoon.com/sites/synergy",
+  "screenshot_url":null,
+  "created_at":"2013-09-17T05:13:08Z",
+  "updated_at":"2013-09-17T05:13:19Z",
+  "user_id":{"51f60d2d5803545326000005"},
+  "state": "current"
+}
+```
 
 Users
 =====
