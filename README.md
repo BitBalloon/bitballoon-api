@@ -147,7 +147,7 @@ Update Site
 * `PATCH /sites/{site_id}` will let you update some attributes on a site
 * `PUT /sites/{site_id}` will let you update some attributes on a site
 
-This lets you update the name (also the preview subdomain), custom_domain and notification_email fields of a site.
+This lets you update the `name`, `custom_domain`, `password` and `notification_email` fields of a site.
 
 
 Destroy Site
