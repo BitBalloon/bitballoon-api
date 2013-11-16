@@ -296,9 +296,18 @@ Get Files
 Get File
 --------
 
-* `GET /sites/{site_id}/files/{path-to-file}` will return the content of a file
+* `GET /sites/{site_id}/files/{path-to-file}` returns the file
 
-This lets you download the file content of the original documents uploaded by a user.
+```json
+{"id":"/index.html",
+"path":"/index.html",
+"sha":"20828dcdf2cd07e5980fe52759101591bf5014ab",
+"mime_type":"text/html",
+"size":27232
+}
+```
+
+You can get the raw contents of the file by using the custom media type `application/vnd.bitballoon.v1.raw` as the Content-Type of your HTTP request.
 
 Put File
 --------
