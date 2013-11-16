@@ -40,6 +40,9 @@ Endpoints
 * `/users/{user_id}/sites` all sites for a specific user
 * `/users/{user_id}/forms` all forms for a specific user
 * `/users/{user_id}/submissions` all form submissions for a specific user
+* `/dns_records` dns records - resellers only
+* `/dns_records/{record_id}/dns_zones` dns zones - resellers only
+* `/access_tokens` access tokens - resellers only
 
 A note on the `site_id`: this can either be the actual `id` of a site, but it is interchangeable with the full domain for a site (some-site.bitballoon.com or site.example.com).
 
@@ -493,3 +496,96 @@ Get Users
 ```
 
 Once you have a user id you can query sites, forms and submissions scoped to that user (ie. /users/{user_id}/sites).
+
+DNS Zones
+=========
+
+**Resellers only**. Manage DNS Zones
+
+Get DNS Zones
+-------------
+
+* `GET /dns_zones` get a list of DNS zones
+
+```json
+[
+  {
+    "id": "5286d0aa58035476d0000005",
+    "name":"www.example.com",
+    "user_id":"52841ed05803545ef0000001",
+    "created_at":"2013-11-16T01:55:54Z",
+    "updated_at":"2013-11-16T01:55:54Z"
+  }
+]
+```
+
+Create DNS Zone
+---------------
+
+* `POST /dns_zones` create a new dns zone, arguments: `name`
+
+Returns 201 on successful creation
+
+Delete DNS Zone
+---------------
+
+* `DELETE /dns_zones/{zone_id}` delete a dns zone
+
+Get records for a zone
+----------------------
+
+* `GET /dns_zones/{zone_id}/dns_records` get a list of dns records
+
+```json
+[
+  {
+    "id":"5286d29658035476d0000006",
+    "hostname":"www",
+    "type":"CNAME",
+    "value":"bitballoon.com",
+    "ttl":"500",
+    "domain_id":"5286d0aa58035476d0000005"
+  }
+]
+```
+
+Create a DNS record
+-------------------
+
+* `POST /dns_zones/{zone_id}/dns_records` arguments: `type`,`hostname`,`value`,`ttl` - supported types: A, CNAME, TXT, MX
+
+Returns 201 on successful creation
+
+Delete a DNS record
+-------------------
+
+* `DELETE /dns_zones/{zone_id}/dns_records/{id}` deletes a record
+
+Return 204 with an empty body
+
+
+Access Tokens
+=============
+
+**Resellers only**. Issue and revoke access tokens on behalf of your users
+
+Issue an access token
+---------------------
+
+* `POST /access_tokens` create an access token for a user. Supply a user: `{"user": {"email": "test@example.com", "uid": "123"}}`
+
+```json
+{
+  "id":"6da5e4827ef6ac05b123279c6ed84c3125bbba59d65facb20d20fb1e73f3c62a",
+  "access_token":"6da5e4827ef6ac05b123279c6ed84c3125bbba59d65facb20d20fb1e73f3c62a",
+  "user_id":"52841ed05803545ef0000001",
+  "created_at":"2013-11-16T01:54:57Z"
+}
+```
+
+Revoke an access token
+----------------------
+
+* `DELETE /access_tokens/{token}` revokes the access token
+
+Returns 204 with an empty body
