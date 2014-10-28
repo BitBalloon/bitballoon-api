@@ -132,7 +132,7 @@ Get Site
   "claimed":true,
   "name":"synergy",
   "custom_domain":"www.example.com",
-  "notification_email:"me@example.com",
+  "notification_email":"me@example.com",
   "url":"http://www.example.com",
   "admin_url":"https://www.bitballoon.com/sites/synergy",
   "screenshot_url":null,
